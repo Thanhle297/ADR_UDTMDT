@@ -69,16 +69,18 @@
                         android:layout_marginEnd="20dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
+
                     <Button
                         android:id="@+id/btnThemGioHang"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="15dp"
-                        android:layout_marginStart="15dp"
+                        android:backgroundTint="#194B81"
+                        android:text="Thêm vào giỏ hàng"
                         android:textColor="@color/white"
-                        android:backgroundTint="#007BFF" android:text="Thêm vào giỏ hàng"
-                        app:cornerRadius="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        app:cornerRadius="10dp" />
                 </LinearLayout>
             </LinearLayout>
 
