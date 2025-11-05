@@ -137,7 +137,7 @@ public class DienThoaiActivity extends AppCompatActivity {
         // Xử lý sự kiện khi ấn nút mũi tên
         toolbar.setNavigationOnClickListener(v -> {
             Intent intent = new Intent(DienThoaiActivity.this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
             finish();
         });

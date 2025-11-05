@@ -82,15 +82,18 @@ SanPhamMoiAdapter spAdapter;
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i){
                     case 0:
+                        drawer_layout.closeDrawer(GravityCompat.START, false);
                         Intent trangchu = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(trangchu);
                         break;
                     case 1:
+                        drawer_layout.closeDrawer(GravityCompat.START, false);
                         Intent dienthoai = new Intent(getApplicationContext(), DienThoaiActivity.class);
                         dienthoai.putExtra("loai",1);
                         startActivity(dienthoai);
                         break;
                     case 2:
+                        drawer_layout.closeDrawer(GravityCompat.START, false);
                         Intent laptop = new Intent(getApplicationContext(), LaptopActivity.class);
                         laptop.putExtra("loai",2);
                         startActivity(laptop);
@@ -201,4 +204,17 @@ SanPhamMoiAdapter spAdapter;
         compositeDisposable.clear();
         super.onDestroy();
     }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//        if (drawer_layout != null && drawer_layout.isDrawerOpen(GravityCompat.START)) {
+//            // Đóng Drawer sau 100ms để tránh giật khung hình
+//            drawer_layout.postDelayed(() ->
+//                    drawer_layout.closeDrawer(GravityCompat.START, false), 100);
+//        }
+//    }
+
+
 }

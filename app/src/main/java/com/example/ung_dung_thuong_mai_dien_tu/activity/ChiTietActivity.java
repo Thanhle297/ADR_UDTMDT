@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -63,7 +64,7 @@ public class ChiTietActivity extends AppCompatActivity {
              if(Utils.manggiohang.get(i).getIdsp() == sanPhamMoi.getId()){
                  Utils.manggiohang.get(i).setSoluong(soluong + Utils.manggiohang.get(i).getSoluong());
                  long gia = (long) sanPhamMoi.getGiasp() * Utils.manggiohang.get(i).getSoluong();
-                 Utils.manggiohang.get(i).setGiasp(gia);
+//                 Utils.manggiohang.get(i).setGiasp(gia);
                  flag = true;
              }
             }
@@ -88,7 +89,11 @@ public class ChiTietActivity extends AppCompatActivity {
             gioHang.setHinhsp(sanPhamMoi.getHinhanh());
             Utils.manggiohang.add(gioHang);
         }
-        badge.setText(String.valueOf(Utils.manggiohang.size()));
+        int totalItem = 0;
+        for (int i =0; i<Utils.manggiohang.size(); i++){
+            totalItem = totalItem + Utils.manggiohang.get(i).getSoluong();
+        }
+        badge.setText(String.valueOf(totalItem));
     }
 
     private void initData() {
@@ -112,6 +117,22 @@ public class ChiTietActivity extends AppCompatActivity {
         btnThemGioHang = findViewById(R.id.btnThemGioHang);
         toolbar = findViewById(R.id.toolbar);
         badge = findViewById(R.id.menu_sl);
+        FrameLayout frameLayoutgiohang = findViewById(R.id.framegiohang);
+        frameLayoutgiohang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent giohang = new Intent(getApplicationContext(), GioHangActivity.class);
+                startActivity(giohang);
+            }
+        });
+
+        if(Utils.manggiohang.size()==0){
+            int totalItem = 0;
+            for (int i =0; i<Utils.manggiohang.size(); i++){
+                totalItem = totalItem + Utils.manggiohang.get(i).getSoluong();
+            }
+            badge.setText(String.valueOf(totalItem));
+        }
     }
 
     private void ActionToolbar() {
@@ -120,7 +141,7 @@ public class ChiTietActivity extends AppCompatActivity {
 
         toolbar.setNavigationOnClickListener(v -> {
             String from = getIntent().getStringExtra("from");
-            Intent intent;
+            Intent intent = null;
 
             if ("dien_thoai".equals(from)) {
                 intent = new Intent(ChiTietActivity.this, DienThoaiActivity.class);
@@ -130,9 +151,10 @@ public class ChiTietActivity extends AppCompatActivity {
                 intent = new Intent(ChiTietActivity.this, MainActivity.class);
             }
 
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
             finish();
         });
+
     }
 }
