@@ -9,6 +9,7 @@
     android:orientation="vertical"
     tools:context=".activity.ChiTietActivity">
 
+    <!-- Thanh Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -28,28 +29,28 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Card cho thông tin sản phẩm -->
+            <!-- CardView hiển thị thông tin sản phẩm -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="6dp"
-                android:backgroundTint="#FFFFFF">
+                app:cardBackgroundColor="#FFFFFF">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <!-- Phần hình ảnh và thông tin cơ bản -->
+                    <!-- Hình ảnh + thông tin -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:padding="16dp">
 
-                        <!-- Image với viền và bo góc -->
+                        <!-- Ảnh sản phẩm -->
                         <androidx.cardview.widget.CardView
                             android:layout_width="150dp"
                             android:layout_height="200dp"
@@ -63,13 +64,13 @@
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/resource_new" />
 
-                            <!-- Badge "NEW" hoặc "HOT" (tùy chỉnh) -->
+                            <!-- Badge "NEW" -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="top|end"
                                 android:layout_margin="8dp"
-                                android:background="@drawable/badge_background"
+                                android:background="#E91E63"
                                 android:paddingStart="8dp"
                                 android:paddingTop="4dp"
                                 android:paddingEnd="8dp"
@@ -81,6 +82,7 @@
                                 android:visibility="gone" />
                         </androidx.cardview.widget.CardView>
 
+                        <!-- Thông tin sản phẩm -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -99,7 +101,7 @@
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
 
-                            <!-- Icon và giá -->
+                            <!-- Giá -->
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -124,7 +126,7 @@
                                     android:textStyle="bold" />
                             </LinearLayout>
 
-                            <!-- Label cho Spinner -->
+                            <!-- Spinner chọn số lượng -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -138,7 +140,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:background="@drawable/spinner"
                                 android:minHeight="40dp"
                                 android:padding="8dp" />
                         </LinearLayout>
@@ -168,13 +169,12 @@
                             android:text="🛒 Thêm vào giỏ hàng"
                             android:textColor="#FFFFFF"
                             android:textSize="16sp"
-                            android:textStyle="bold"
-                            app:cornerRadius="12dp" />
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Card cho mô tả chi tiết -->
+            <!-- CardView mô tả chi tiết -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -183,7 +183,7 @@
                 android:layout_marginBottom="12dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="6dp"
-                android:backgroundTint="#FFFFFF">
+                app:cardBackgroundColor="#FFFFFF">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -191,7 +191,7 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <!-- Header với icon và thanh dọc -->
+                    <!-- Header -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -223,15 +223,21 @@
                             android:textStyle="bold" />
                     </LinearLayout>
 
-                    <!-- Mô tả sản phẩm -->
+                    <!-- Scroll mô tả -->
                     <ScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:scrollbars="vertical"
-                        android:fadeScrollbars="false">
-
-
-                    </ScrollView>
+                        android:fadeScrollbars="false" />
+                    <TextView
+                        android:id="@+id/tvMoTaChiTiet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Đây là mô tả chi tiết sản phẩm..."
+                        android:textColor="#424242"
+                        android:textSize="14sp"
+                        android:lineSpacingExtra="4dp"
+                        android:padding="4dp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

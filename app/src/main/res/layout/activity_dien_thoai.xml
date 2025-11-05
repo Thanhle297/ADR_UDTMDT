@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".activity.DienThoaiActivity">
 
     <LinearLayout
@@ -14,7 +13,7 @@
         android:orientation="vertical"
         android:background="#F5F5F5">
 
-        <!-- Toolbar với elevation và icon -->
+        <!-- Toolbar -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -22,10 +21,9 @@
             android:background="#3A76B4"
             android:elevation="4dp"
             app:title="📱 Điện thoại"
-            app:titleTextAppearance="@style/ToolbarTitleStyle"
             app:titleTextColor="#FFFFFF" />
 
-        <!-- Header Section với thống kê -->
+        <!-- Header Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,7 +66,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- RecyclerView với padding cải thiện -->
+        <!-- RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_dt"
             android:layout_width="match_parent"
@@ -81,7 +79,7 @@
             android:clipToPadding="false"
             android:scrollbars="vertical" />
 
-        <!-- Empty State (ẩn khi có dữ liệu) -->
+        <!-- Empty State -->
         <LinearLayout
             android:id="@+id/emptyState"
             android:layout_width="match_parent"
