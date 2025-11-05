@@ -5,6 +5,8 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2196F3"
+    app:cardBackgroundColor="#59A3EB"
     tools:context=".activity.MainActivity">
 
     <LinearLayout
@@ -17,7 +19,7 @@
             android:id="@+id/toolbarHome"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#007BFF"
+            android:background="#557EA9"
             android:elevation="4dp"
             app:title="Home"
             app:titleTextColor="#FFFFFF" />
@@ -25,8 +27,8 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true"
-            android:background="#F5F5F5">
+            android:background="#F5F5F5"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -51,26 +53,26 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
                     android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
                     android:paddingBottom="8dp">
 
                     <View
                         android:layout_width="4dp"
                         android:layout_height="24dp"
-                        android:background="#007BFF"
-                        android:layout_marginEnd="8dp" />
+                        android:layout_marginEnd="8dp"
+                        android:background="#007BFF" />
 
                     <TextView
                         android:id="@+id/textviewHome"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Sản phẩm mới"
-                        android:textColor="#212121"
-                        android:textSize="20sp"
+                        android:textColor="#0E5790"
+                        android:textSize="25sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -79,11 +81,11 @@
                     android:id="@+id/recyclerViewHome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clipToPadding="false"
                     android:nestedScrollingEnabled="false"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
-                    android:paddingBottom="16dp"
-                    android:clipToPadding="false" />
+                    android:paddingBottom="16dp" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
@@ -107,8 +109,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:background="#007BFF"
-                android:orientation="vertical"
                 android:gravity="bottom"
+                android:orientation="vertical"
                 android:padding="16dp">
 
                 <TextView
@@ -116,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:text="Menu"
                     android:textColor="#FFFFFF"
-                    android:textSize="24sp"
+                    android:textSize="26sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -131,9 +133,9 @@
                 android:id="@+id/listviewHome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
                 android:divider="@android:color/transparent"
-                android:dividerHeight="0dp" />
+                android:dividerHeight="0dp"
+                android:paddingTop="8dp" />
         </LinearLayout>
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>
