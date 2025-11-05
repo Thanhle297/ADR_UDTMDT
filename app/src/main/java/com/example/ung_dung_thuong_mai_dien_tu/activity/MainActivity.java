@@ -127,6 +127,8 @@ SanPhamMoiAdapter spAdapter;
                         LoaispModel -> {
                             if(LoaispModel.isSuccess()) {
                                 mangloaisp = LoaispModel.getResult();
+
+
                                 loaispAdapter = new LoaispAdapter(getApplicationContext(), mangloaisp);
                                 listviewHome.setAdapter(loaispAdapter);
                             }

@@ -19,6 +19,15 @@
             android:name=".activity.ChiTietActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.ManHinhActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.PCActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MayTinhBangActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.LaptopActivity"
             android:exported="false" />
         <activity
