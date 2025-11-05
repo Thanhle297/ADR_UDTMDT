@@ -5,6 +5,8 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2196F3"
+    app:cardBackgroundColor="#59A3EB"
     tools:context=".activity.MainActivity">
 
     <LinearLayout
@@ -12,56 +14,128 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <!-- Toolbar with elevation -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarHome"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#007BFF"  app:title="Home"
-            app:titleTextColor="#FFFFFF" /> <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
+            android:background="#557EA9"
+            android:elevation="4dp"
+            app:title="Home"
+            app:titleTextColor="#FFFFFF" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F5F5F5"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- ViewFlipper with rounded corners -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="4dp">
+
+                    <ViewFlipper
+                        android:id="@+id/viewSlideshow"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp" />
+                </androidx.cardview.widget.CardView>
+
+                <!-- Section Title -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp">
+
+                    <View
+                        android:layout_width="4dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="#007BFF" />
+
+                    <TextView
+                        android:id="@+id/textviewHome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sản phẩm mới"
+                        android:textColor="#0E5790"
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- RecyclerView -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="16dp" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+
+    <!-- Navigation Drawer -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationview"
+        android:layout_width="280dp"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_gravity="start"
+        android:background="@color/white"
+        android:fitsSystemWindows="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#FFFFFF"> <ViewFlipper
-            android:id="@+id/viewSlideshow"
-            android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textviewHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="16dp" android:layout_marginBottom="8dp" android:text="Sản phẩm mới"
-                android:textColor="#007BFF" android:textSize="20sp"
-                android:textStyle="bold" />
+            <!-- Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:background="#007BFF"
+                android:gravity="bottom"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewHome"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Menu"
+                    android:textColor="#FFFFFF"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E0E0E0" />
+
+            <!-- ListView -->
+            <ListView
+                android:id="@+id/listviewHome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp" />
+                android:divider="@android:color/transparent"
+                android:dividerHeight="0dp"
+                android:paddingTop="8dp" />
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-    </LinearLayout>
-
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigationview"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/white"
-        android:layout_gravity="start">
-        <ListView
-            android:id="@+id/listviewHome"
-            android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

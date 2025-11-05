@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_marginTop="20dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="10dp"
+    android:layout_marginTop="20dp"
+    android:background="#EEF5FF">
+
+    <!-- Ảnh sản phẩm -->
     <ImageView
         android:id="@+id/item_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/ic_media_24"
         android:src="@drawable/ic_media_24"
-        android:layout_marginLeft="10dp"
-        android:layout_width="45dp"
-        android:layout_height="45dp"/>
+        android:scaleType="centerCrop"
+        android:contentDescription="Icon sản phẩm" />
+
+    <!-- Tên sản phẩm -->
     <TextView
         android:id="@+id/item_tensp"
-        android:textSize="15sp"
-        android:layout_marginLeft="10dp"
-        android:layout_gravity="center"
-        android:text="Điện thoại"
-        android:textColor="@android:color/holo_red_light"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
+        android:layout_height="wrap_content"
+        android:text="Điện thoại"
+        android:textColor="#2677C7"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-medium"
+        android:shadowColor="#20000000"
+        android:shadowDx="0"
+        android:shadowDy="1"
+        android:shadowRadius="1"
+        android:layout_gravity="center_vertical" />
 </LinearLayout>
