@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,6 +35,7 @@ import com.example.ung_dung_thuong_mai_dien_tu.model.SpMoi;
 import com.example.ung_dung_thuong_mai_dien_tu.model.SpMoiModel;
 import com.example.ung_dung_thuong_mai_dien_tu.utils.Utils;
 import com.google.android.material.navigation.NavigationView;
+import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +58,8 @@ CompositeDisposable compositeDisposable = new CompositeDisposable();
 ApiBanHang apiBanHang;
 List<SpMoi> mangSpMoi;
 SanPhamMoiAdapter spAdapter;
+NotificationBadge badge;
+FrameLayout frameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +77,10 @@ SanPhamMoiAdapter spAdapter;
             getEventClick();
         }else{
             Toast.makeText(getApplicationContext(), "Không có kết nối Internet, vui lòng kết nối!", Toast.LENGTH_LONG).show();
+        }
+
+        if (Utils.manggiohang == null) {
+            Utils.manggiohang = new ArrayList<>();
         }
     }
 
@@ -197,15 +205,40 @@ SanPhamMoiAdapter spAdapter;
         navigationview = findViewById(R.id.navigationview);
         listviewHome = findViewById(R.id.listviewHome);
         drawer_layout = findViewById(R.id.drawer_layout);
+        badge =findViewById(R.id.menu_sl);
+        frameLayout = findViewById(R.id.framegiohang);
         // khởi tạo mang
         mangloaisp = new ArrayList<>();
         mangSpMoi = new ArrayList<>();
         // khởi tạo adapter
         if(Utils.manggiohang == null){
             Utils.manggiohang = new ArrayList<>();
+        }else{
+            int totalItem = 0;
+            for (int i =0; i<Utils.manggiohang.size(); i++){
+                totalItem = totalItem + Utils.manggiohang.get(i).getSoluong();
+            }
+            badge.setText(String.valueOf(totalItem));
         }
-
+        frameLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent giohang = new Intent(getApplicationContext(), GioHangActivity.class);
+                startActivity(giohang);
+            }
+        });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        int totalItem = 0;
+        for (int i =0; i<Utils.manggiohang.size(); i++){
+            totalItem = totalItem + Utils.manggiohang.get(i).getSoluong();
+        }
+        badge.setText(String.valueOf(totalItem));
+    }
+
     private boolean isConnected (Context context){
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo wifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);

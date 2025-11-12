@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -52,6 +53,8 @@ public class ChiTietActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 themGioHang();
+                Utils.saveGioHang(getApplicationContext());
+                Toast.makeText(ChiTietActivity.this, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -89,6 +92,16 @@ public class ChiTietActivity extends AppCompatActivity {
             gioHang.setHinhsp(sanPhamMoi.getHinhanh());
             Utils.manggiohang.add(gioHang);
         }
+        int totalItem = 0;
+        for (int i =0; i<Utils.manggiohang.size(); i++){
+            totalItem = totalItem + Utils.manggiohang.get(i).getSoluong();
+        }
+        badge.setText(String.valueOf(totalItem));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         int totalItem = 0;
         for (int i =0; i<Utils.manggiohang.size(); i++){
             totalItem = totalItem + Utils.manggiohang.get(i).getSoluong();
