@@ -16,6 +16,15 @@
         android:theme="@style/Theme.Ung_dung_thuong_mai_dien_tu"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.ManHinhActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.PCActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.TabletActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.GioHangActivity"
             android:exported="false" />
         <activity

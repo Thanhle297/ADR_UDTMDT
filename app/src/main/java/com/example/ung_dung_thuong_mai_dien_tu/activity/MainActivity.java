@@ -98,6 +98,24 @@ SanPhamMoiAdapter spAdapter;
                         laptop.putExtra("loai",2);
                         startActivity(laptop);
                         break;
+                    case 3:
+                        drawer_layout.closeDrawer(GravityCompat.START, false);
+                        Intent tablet = new Intent(getApplicationContext(), TabletActivity.class);
+                        tablet.putExtra("loai",3);
+                        startActivity(tablet);
+                        break;
+                    case 4:
+                        drawer_layout.closeDrawer(GravityCompat.START, false);
+                        Intent pc = new Intent(getApplicationContext(), PCActivity.class);
+                        pc.putExtra("loai",4);
+                        startActivity(pc);
+                        break;
+                    case 5:
+                        drawer_layout.closeDrawer(GravityCompat.START, false);
+                        Intent manhinh = new Intent(getApplicationContext(), ManHinhActivity.class);
+                        startActivity(manhinh);
+                        break;
+
                 }
             }
         });
@@ -139,8 +157,8 @@ SanPhamMoiAdapter spAdapter;
 
     private void ActionViewFlipper() {
         List<String> Mangquangcao = new ArrayList<>();
-        Mangquangcao.add("https://mauweb.monamedia.net/thegioididong/wp-content/uploads/2017/12/banner-Le-hoi-phu-kien-800-300.png");
-        Mangquangcao.add("https://mauweb.monamedia.net/thegioididong/wp-content/uploads/2017/12/banner-HC-Tra-Gop-800-300.png");
+        Mangquangcao.add("http://103.90.224.183/uploads/banner/banner1.jpg");
+        Mangquangcao.add("http://103.90.224.183/uploads/banner/banner2.jpg");
         Mangquangcao.add("https://mauweb.monamedia.net/thegioididong/wp-content/uploads/2017/12/banner-big-ky-nguyen-800-300.jpg");
         for (int i = 0; i < Mangquangcao.size(); i++) {
             ImageView imageView = new ImageView(getApplicationContext());
