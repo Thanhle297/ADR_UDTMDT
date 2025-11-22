@@ -15,27 +15,50 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ung_dung_thuong_mai_dien_tu"
         android:usesCleartextTraffic="true">
+
+        <!-- Giỏ hàng -->
         <activity
             android:name=".activity.GioHangActivity"
             android:exported="false" />
+
+        <!-- Chi tiết sản phẩm -->
         <activity
             android:name=".activity.ChiTietActivity"
             android:exported="false" />
+
+        <!-- Laptop -->
         <activity
             android:name=".activity.LaptopActivity"
             android:exported="false" />
+
+        <!-- Điện thoại -->
         <activity
             android:name=".activity.DienThoaiActivity"
             android:exported="false" />
+
+        <!-- Màn hình chính -->
         <activity
             android:name=".activity.MainActivity"
+            android:exported="false" />
+
+        <!-- Đăng ký -->
+        <activity
+            android:name=".activity.DangKyActivity"
+            android:exported="false" />
+
+        <!-- Đăng nhập: ĐÂY LÀ MÀN HÌNH MỞ ĐẦU -->
+        <activity
+            android:name=".activity.DangNhapActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
