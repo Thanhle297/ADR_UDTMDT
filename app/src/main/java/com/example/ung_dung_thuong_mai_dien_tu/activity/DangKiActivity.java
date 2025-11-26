@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -26,6 +27,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class DangKiActivity extends AppCompatActivity {
+    TextView txtdangnhap;
     EditText email,password,password2,phone,username;
     AppCompatButton btndangky;
     ApiBanHang apiBanHang;
@@ -45,6 +47,15 @@ public class DangKiActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dangky();
+            }
+        });
+
+        txtdangnhap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DangKiActivity.this, DangNhapActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
     }
@@ -101,6 +112,7 @@ public class DangKiActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
         phone = findViewById(R.id.phone);
         btndangky = findViewById(R.id.btndangky);
+        txtdangnhap = findViewById(R.id.txtdangnhap);
     }
 
     @Override

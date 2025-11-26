@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Utils {
-//    public  static final String BASE_URL="http://103.90.224.183/banhang/";
-    public static final String BASE_URL="http://192.168.1.49:8080/banhang/";
+    public  static final String BASE_URL="http://103.90.224.183/banhang/";
+//    public static final String BASE_URL="http://192.168.1.49:8080/banhang/";
 //    public static final String BASE_URL="http://10.15.67.18:8080/banhang/";
 //    public static final String BASE_URL="http://192.168.1.51:8080/banhang/";
     public static List<GioHang> manggiohang = new ArrayList<>();
