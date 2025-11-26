@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Ung_dung_thuong_mai_dien_tu</string>
+    <string name="login">Đăng nhập</string>
+    <string name="register">Đăng ký</string>
 </resources>

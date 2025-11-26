@@ -1,5 +1,6 @@
 package com.example.ung_dung_thuong_mai_dien_tu.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Button;
@@ -31,6 +32,7 @@ public class GioHangActivity extends AppCompatActivity {
     TextView txtTongTien, txtGioHangTrong;
     Button btnMuaHang;
     GioHangAdapter adapter;
+    long tongtien;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +55,18 @@ public class GioHangActivity extends AppCompatActivity {
         }
 
         TinhTongTien();
-        btnMuaHang.setOnClickListener(v -> {
-            Toast.makeText(this, "Chức năng thanh toán đang phát triển", Toast.LENGTH_SHORT).show();
+        initControl();
+
+    }
+
+    private void initControl() {
+        btnMuaHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ThanhToanActivity.class);
+                intent.putExtra("tongtien", tongtien);
+                startActivity(intent);
+            }
         });
     }
 
@@ -66,7 +78,7 @@ public class GioHangActivity extends AppCompatActivity {
     }
 
     private void TinhTongTien() {
-        long tongtien = 0;
+        tongtien = 0;
         for (int i = 0; i < Utils.manggiohang.size(); i++) {
             tongtien  = tongtien + (Utils.manggiohang.get(i).getGiasp()*Utils.manggiohang.get(i).getSoluong());
         }

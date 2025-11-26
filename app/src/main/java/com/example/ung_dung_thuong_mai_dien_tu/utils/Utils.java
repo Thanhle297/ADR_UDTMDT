@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.example.ung_dung_thuong_mai_dien_tu.model.GioHang;
+import com.example.ung_dung_thuong_mai_dien_tu.model.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -14,7 +15,8 @@ import java.util.List;
 public class Utils {
 //    public  static final String BASE_URL="http://103.90.224.183/banhang/";
     public static final String BASE_URL="http://192.168.1.49:8080/banhang/";
-//    public static final String BASE_URL="http://10.15.19.3:8080/banhang/";
+//    public static final String BASE_URL="http://10.15.67.18:8080/banhang/";
+//    public static final String BASE_URL="http://192.168.1.51:8080/banhang/";
     public static List<GioHang> manggiohang = new ArrayList<>();
 
     // Lưu giỏ hàng vào SharedPreferences
@@ -40,4 +42,7 @@ public class Utils {
             manggiohang.addAll(savedList);
         }
     }
+
+    // gửi tk mk lại đăng nhập sau khi đăng ký
+    public static User user_current = new User();
 }
