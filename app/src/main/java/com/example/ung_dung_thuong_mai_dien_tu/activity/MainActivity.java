@@ -120,7 +120,14 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 5:
                     drawer_layout.closeDrawer(GravityCompat.START, false);
-                    startActivity(new Intent(getApplicationContext(), ManHinhActivity.class));
+                    Intent manhinh = new Intent(getApplicationContext(), ManHinhActivity.class);
+                    manhinh.putExtra("loai", 5);
+                    startActivity(manhinh);
+                    break;
+                case 6:
+                    drawer_layout.closeDrawer(GravityCompat.START, false);
+                    Intent thongtin = new Intent(getApplicationContext(),XemDonActivity.class);
+                    startActivity(thongtin);
                     break;
             }
         });

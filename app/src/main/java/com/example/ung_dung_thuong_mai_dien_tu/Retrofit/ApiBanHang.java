@@ -2,6 +2,7 @@ package com.example.ung_dung_thuong_mai_dien_tu.Retrofit;
 
 import io.reactivex.rxjava3.core.Observable;
 
+import com.example.ung_dung_thuong_mai_dien_tu.model.DonHangModel;
 import com.example.ung_dung_thuong_mai_dien_tu.model.LoaispModel;
 import com.example.ung_dung_thuong_mai_dien_tu.model.SpMoiModel;
 import com.example.ung_dung_thuong_mai_dien_tu.model.UserModel;
@@ -47,6 +48,26 @@ public interface ApiBanHang {
     @POST("reset.php")
     Observable<UserModel> resetPass(
             @Field("email") String email
+
+    );
+    // create Oder
+    @FormUrlEncoded
+    @POST("donhang.php")
+    Observable<UserModel> createOder(
+            @Field("email") String email,
+            @Field("sdt") String sdt,
+            @Field("tongtien") String tongtien,
+            @Field("iduser") int iduser,
+            @Field("diachi") String diachi,
+            @Field("soluong") int soluong,
+            @Field("chitiet") String chitiet
+
+    );
+
+    @FormUrlEncoded
+    @POST("xemdonhang.php")
+    Observable<DonHangModel> xemDonHang(
+            @Field("iduser") int id
 
     );
 }
