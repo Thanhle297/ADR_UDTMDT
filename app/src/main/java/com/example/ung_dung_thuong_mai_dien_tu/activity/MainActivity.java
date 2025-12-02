@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     SanPhamMoiAdapter spAdapter;
     NotificationBadge badge;
     FrameLayout frameLayout;
+    ImageView imgsearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,6 +211,15 @@ public class MainActivity extends AppCompatActivity {
         frameLayout.setOnClickListener(v -> {
             Intent giohang = new Intent(getApplicationContext(), GioHangActivity.class);
             startActivity(giohang);
+        });
+
+        imgsearch = findViewById(R.id.img_search);
+        imgsearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(intent);
+            }
         });
     }
 

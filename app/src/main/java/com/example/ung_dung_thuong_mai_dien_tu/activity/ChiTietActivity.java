@@ -47,8 +47,8 @@ public class ChiTietActivity extends AppCompatActivity {
     private void initControl() {
         btnThemGioHang.setOnClickListener(v -> {
             themGioHang();
-            Utils.saveGioHang(getApplicationContext()); // ✅ lưu lại SharedPreferences
-            sendBroadcast(new Intent("update_badge")); // ✅ cập nhật badge cho MainActivity
+            Utils.saveGioHang(getApplicationContext());
+            sendBroadcast(new Intent("update_badge"));
             Toast.makeText(ChiTietActivity.this, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
         });
     }
@@ -60,21 +60,19 @@ public class ChiTietActivity extends AppCompatActivity {
         for (GioHang g : Utils.manggiohang) {
             if (g.getIdsp() == sanPhamMoi.getId()) {
                 g.setSoluong(g.getSoluong() + soluong);
-                long gia = (long) sanPhamMoi.getGiasp() * g.getSoluong();
-                g.setGiasp(gia);
+                g.setGiasp(sanPhamMoi.getGiasp() * g.getSoluong());
                 exists = true;
                 break;
             }
         }
 
         if (!exists) {
-            long gia = (long) sanPhamMoi.getGiasp() * soluong;
             GioHang gioHang = new GioHang();
-            gioHang.setGiasp(gia);
-            gioHang.setSoluong(soluong);
             gioHang.setIdsp(sanPhamMoi.getId());
             gioHang.setTensp(sanPhamMoi.getTensp());
             gioHang.setHinhsp(sanPhamMoi.getHinhanh());
+            gioHang.setSoluong(soluong);
+            gioHang.setGiasp(sanPhamMoi.getGiasp() * soluong);
             Utils.manggiohang.add(gioHang);
         }
 
@@ -82,12 +80,10 @@ public class ChiTietActivity extends AppCompatActivity {
     }
 
     private void updateBadge() {
-        int totalItem = 0;
-        for (GioHang g : Utils.manggiohang) {
-            totalItem += g.getSoluong();
-        }
-        badge.setNumber(totalItem); // ✅ dùng setNumber()
-        badge.setVisibility(View.VISIBLE);
+        int total = 0;
+        for (GioHang g : Utils.manggiohang) total += g.getSoluong();
+        badge.setNumber(total);
+        badge.setVisibility(total > 0 ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -101,16 +97,14 @@ public class ChiTietActivity extends AppCompatActivity {
 
         tvTenSanPham.setText(sanPhamMoi.getTensp());
         tvMoTaChiTiet.setText(sanPhamMoi.getMota());
-        Glide.with(getApplicationContext())
-                .load(sanPhamMoi.getHinhanh().trim()) // ✅ tránh lỗi URL có ký tự thừa
-                .into(imgChiTiet);
+        Glide.with(this).load(sanPhamMoi.getHinhanh()).into(imgChiTiet);
 
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         tvGiaSanPham.setText("Giá: " + decimalFormat.format(sanPhamMoi.getGiasp()) + " VNĐ");
 
-        Integer[] so = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        ArrayAdapter<Integer> adapterspin = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, so);
-        spinner.setAdapter(adapterspin);
+        Integer[] soluong = {1,2,3,4,5,6,7,8,9,10};
+        ArrayAdapter<Integer> adapterSpin = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, soluong);
+        spinner.setAdapter(adapterSpin);
     }
 
     private void Anhxa() {
@@ -125,8 +119,7 @@ public class ChiTietActivity extends AppCompatActivity {
 
         FrameLayout frameLayoutgiohang = findViewById(R.id.framegiohang);
         frameLayoutgiohang.setOnClickListener(v -> {
-            Intent giohang = new Intent(getApplicationContext(), GioHangActivity.class);
-            startActivity(giohang);
+            startActivity(new Intent(getApplicationContext(), GioHangActivity.class));
         });
 
         updateBadge();
@@ -141,14 +134,16 @@ public class ChiTietActivity extends AppCompatActivity {
             Intent intent;
 
             if ("dien_thoai".equals(from)) {
-                intent = new Intent(ChiTietActivity.this, DienThoaiActivity.class);
+                intent = new Intent(this, DienThoaiActivity.class);
             } else if ("laptop".equals(from)) {
-                intent = new Intent(ChiTietActivity.this, LaptopActivity.class);
+                intent = new Intent(this, LaptopActivity.class);
+            } else if ("timkiem".equals(from)) {
+                intent = new Intent(this, SearchActivity.class);
             } else {
-                intent = new Intent(ChiTietActivity.this, MainActivity.class);
+                intent = new Intent(this, MainActivity.class);
             }
 
-            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
         });

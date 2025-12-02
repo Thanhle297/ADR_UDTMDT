@@ -63,11 +63,19 @@ public interface ApiBanHang {
             @Field("chitiet") String chitiet
 
     );
-
+    // xem đơn hàng
     @FormUrlEncoded
     @POST("xemdonhang.php")
     Observable<DonHangModel> xemDonHang(
             @Field("iduser") int id
+
+    );
+
+    // tìm kiếm
+    @FormUrlEncoded
+    @POST("timkiem.php")
+    Observable<SpMoiModel> search(
+            @Field("search") String search
 
     );
 }
