@@ -93,7 +93,11 @@ public class MainActivity extends AppCompatActivity {
             switch (i) {
                 case 0:
                     drawer_layout.closeDrawer(GravityCompat.START, false);
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    if (!(this instanceof MainActivity)) {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                    }
                     break;
                 case 1:
                     drawer_layout.closeDrawer(GravityCompat.START, false);
