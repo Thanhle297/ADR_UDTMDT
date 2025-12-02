@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"  android:elevation="10dp"
+    android:layout_height="wrap_content"
+    android:elevation="10dp"
     app:cardCornerRadius="4dp"
-
     android:layout_margin="5dp">
 
     <LinearLayout
@@ -13,6 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp">
+
+        <!-- CHECKBOX BÊN TRÁI CỤM THÔNG TIN -->
+        <CheckBox
+            android:id="@+id/item_giohang_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="8dp"/>
+
+        <!-- ẢNH SẢN PHẨM -->
         <ImageView
             android:id="@+id/item_giohang_image"
             android:src="@drawable/logo_shop"
@@ -20,12 +30,14 @@
             android:layout_width="100dp"
             android:layout_height="100dp"/>
 
+        <!-- KHỐI THÔNG TIN -->
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="12dp">
+
             <TextView
                 android:id="@+id/item_giohang_tensp"
                 android:text="Tên sản phầm"
@@ -38,7 +50,6 @@
             <TextView
                 android:id="@+id/item_giohang_gia"
                 android:text="50.000 Đ"
-
                 android:textColor="@android:color/holo_red_dark"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
@@ -80,10 +91,11 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/add" />
-                </LinearLayout>
 
+                </LinearLayout>
                 <TextView
                     android:id="@+id/item_giohang_giasp2"
+                    android:visibility="gone"
                     android:text="50.000 Đ"
                     android:layout_marginRight="5dp"
                     android:gravity="center"
@@ -93,8 +105,10 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"/>
-
             </RelativeLayout>
+
+
         </LinearLayout>
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

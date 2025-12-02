@@ -65,6 +65,7 @@ public class GioHangActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ThanhToanActivity.class);
                 intent.putExtra("tongtien", tongtien);
+                Utils.manggiohang.clear();
                 startActivity(intent);
             }
         });
@@ -79,8 +80,8 @@ public class GioHangActivity extends AppCompatActivity {
 
     private void TinhTongTien() {
         tongtien = 0;
-        for (int i = 0; i < Utils.manggiohang.size(); i++) {
-            tongtien  = tongtien + (Utils.manggiohang.get(i).getGiasp()*Utils.manggiohang.get(i).getSoluong());
+        for (int i = 0; i < Utils.mangmuahang.size(); i++) {
+            tongtien  = tongtien + (Utils.mangmuahang.get(i).getGiasp()*Utils.mangmuahang.get(i).getSoluong());
         }
         DecimalFormat df = new DecimalFormat("###,###,###");
         txtTongTien.setText(df.format(tongtien) + " VNĐ");
