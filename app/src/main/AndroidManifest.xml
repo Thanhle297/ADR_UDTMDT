@@ -16,6 +16,15 @@
         android:theme="@style/Theme.Ung_dung_thuong_mai_dien_tu"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".activity.SearchActivity"
             android:exported="false" />
         <activity
@@ -30,11 +39,7 @@
         <activity
             android:name=".activity.DangNhapActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activity.DangKiActivity"

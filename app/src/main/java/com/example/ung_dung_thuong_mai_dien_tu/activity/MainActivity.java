@@ -1,6 +1,7 @@
 package com.example.ung_dung_thuong_mai_dien_tu.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -32,6 +34,7 @@ import com.example.ung_dung_thuong_mai_dien_tu.adapter.SanPhamMoiAdapter;
 import com.example.ung_dung_thuong_mai_dien_tu.model.GioHang;
 import com.example.ung_dung_thuong_mai_dien_tu.model.Loaisp;
 import com.example.ung_dung_thuong_mai_dien_tu.model.SpMoi;
+import com.example.ung_dung_thuong_mai_dien_tu.model.User;
 import com.example.ung_dung_thuong_mai_dien_tu.utils.Utils;
 import com.google.android.material.navigation.NavigationView;
 import com.nex3z.notificationbadge.NotificationBadge;
@@ -39,6 +42,7 @@ import com.nex3z.notificationbadge.NotificationBadge;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.paperdb.Paper;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -68,6 +72,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
+
+        Paper.init(this);
+        if(Paper.book().read("user") != null) {
+            User user = Paper.book().read("user");
+            Utils.user_current = user;
+        }
+
         Anhxa();
         ActionBar();
 
@@ -134,6 +145,33 @@ public class MainActivity extends AppCompatActivity {
                     Intent thongtin = new Intent(getApplicationContext(),XemDonActivity.class);
                     startActivity(thongtin);
                     break;
+                case 9:
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setTitle("Xác nhận");
+                    builder.setMessage("Bạn có chắc chắn muốn đăng xuất không?");
+
+                    // Nút Đồng ý
+                    builder.setPositiveButton("Đăng xuất", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // xóa key user
+                            Paper.book().delete("user");
+                            Intent dangnhap = new Intent(getApplicationContext(), DangNhapActivity.class);
+                            startActivity(dangnhap);
+                            finish();
+                        }
+                    });
+
+                    // Nút Hủy
+                    builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    builder.show();
+
             }
         });
     }
@@ -163,6 +201,7 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(LoaispModel -> {
                     if (LoaispModel.isSuccess()) {
                         mangloaisp = LoaispModel.getResult();
+//                        mangloaisp.add(new Loaisp("Đăng xuất",""));
                         loaispAdapter = new LoaispAdapter(getApplicationContext(), mangloaisp);
                         listviewHome.setAdapter(loaispAdapter);
                     }

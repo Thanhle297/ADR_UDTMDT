@@ -19,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.ung_dung_thuong_mai_dien_tu.R;
 import com.example.ung_dung_thuong_mai_dien_tu.Retrofit.ApiBanHang;
 import com.example.ung_dung_thuong_mai_dien_tu.Retrofit.RetrofitClient;
+import com.example.ung_dung_thuong_mai_dien_tu.model.UserModel;
 import com.example.ung_dung_thuong_mai_dien_tu.utils.Utils;
 
 import io.paperdb.Paper;
@@ -99,7 +100,7 @@ public class DangNhapActivity extends AppCompatActivity {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            Login(Paper.book().read("email"),Paper.book().read("password"));
+                            //Login(Paper.book().read("email"),Paper.book().read("password"));
                         }
                     },1000);
                 }
@@ -120,6 +121,8 @@ public class DangNhapActivity extends AppCompatActivity {
                                 Paper.book().write("isLogin", isLogin);
 
                                 Utils.user_current = userModel.getResult().get(0);
+                                // lưu lại thông tin người dùng
+                                Paper.book().write("user", userModel.getResult().get(0));
 
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);

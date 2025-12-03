@@ -4,6 +4,7 @@ import io.reactivex.rxjava3.core.Observable;
 
 import com.example.ung_dung_thuong_mai_dien_tu.model.DonHangModel;
 import com.example.ung_dung_thuong_mai_dien_tu.model.LoaispModel;
+import com.example.ung_dung_thuong_mai_dien_tu.model.PingModel;
 import com.example.ung_dung_thuong_mai_dien_tu.model.SpMoiModel;
 import com.example.ung_dung_thuong_mai_dien_tu.model.UserModel;
 
@@ -78,4 +79,9 @@ public interface ApiBanHang {
             @Field("search") String search
 
     );
+
+    //check ping
+    @GET("ping.php")
+    Observable<PingModel> pingServer();
+
 }
