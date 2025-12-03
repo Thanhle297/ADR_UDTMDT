@@ -103,10 +103,11 @@ public class TabletAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tensp = itemView.findViewById(R.id.itemdt_tensp);
-            giasp = itemView.findViewById(R.id.itemdt_giasp);
-            motasp = itemView.findViewById(R.id.itemdt_motasp);
-            hinhanh = itemView.findViewById(R.id.itemdt_image);
+            tensp = itemView.findViewById(R.id.itemtablet_tensp);
+            tensp = itemView.findViewById(R.id.itemtablet_tensp);
+            giasp = itemView.findViewById(R.id.itemtablet_giasp);
+            motasp = itemView.findViewById(R.id.itemtablet_motasp);
+            hinhanh = itemView.findViewById(R.id.itemtablet_image);
             itemView.setOnClickListener(this);
         }
 

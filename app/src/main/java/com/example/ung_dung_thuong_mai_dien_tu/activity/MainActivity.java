@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(thongtin);
                     break;
                 case 9:
+                    // đăng xuất
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                     builder.setTitle("Xác nhận");
                     builder.setMessage("Bạn có chắc chắn muốn đăng xuất không?");

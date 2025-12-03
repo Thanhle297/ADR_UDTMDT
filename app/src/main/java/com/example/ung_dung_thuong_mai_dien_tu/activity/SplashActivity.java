@@ -177,10 +177,11 @@ public class SplashActivity extends AppCompatActivity {
     private void checkLoginStatus() {
         Object user = Paper.book().read("user");
 
+        // toán tử 3 ngôi
+        // nếu user != null thì chuyển sang MainActivity, ngược lại chuyển sang DangNhapActivity
         Intent intent = (user == null)
                 ? new Intent(this, DangNhapActivity.class)
                 : new Intent(this, MainActivity.class);
-
         startActivity(intent);
         finish();
     }

@@ -70,7 +70,7 @@ public class SearchActivity extends AppCompatActivity {
 
         toolbar.setNavigationOnClickListener(v -> {
             Intent intent = new Intent(SearchActivity.this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
             finish();
         });
