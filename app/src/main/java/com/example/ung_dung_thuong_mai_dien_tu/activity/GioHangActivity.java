@@ -41,6 +41,9 @@ public class GioHangActivity extends AppCompatActivity {
         AnhXa();
         ActionToolbar();
 
+        // Reset danh sách sản phẩm được chọn mỗi lần vào giỏ hàng
+        Utils.mangmuahang.clear();
+
         // Load giỏ hàng từ SharedPreferences
         Utils.loadGioHang(getApplicationContext());
 
@@ -65,7 +68,7 @@ public class GioHangActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ThanhToanActivity.class);
                 intent.putExtra("tongtien", tongtien);
-                Utils.manggiohang.clear();
+//                Utils.manggiohang.clear();
                 startActivity(intent);
             }
         });

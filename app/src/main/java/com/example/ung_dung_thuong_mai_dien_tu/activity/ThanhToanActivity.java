@@ -68,36 +68,64 @@ public class ThanhToanActivity extends AppCompatActivity {
         txtemail.setText(Utils.user_current.getEmail());
         txtphone.setText(Utils.user_current.getPhone());
 
-        btnDatHang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String str_diachi = edtdiachi.getText().toString().trim();
-                if(TextUtils.isEmpty(str_diachi)){
-                    Toast.makeText(getApplicationContext(), "Vui lòng nhập địa chỉ nhận hàng!", Toast.LENGTH_SHORT).show();
-                }else{
-                    // post data
-                    String str_email = Utils.user_current.getEmail();
-                    String str_sdt = Utils.user_current.getPhone();
-                    int iduser = Utils.user_current.getId();
-                    Log.d("test", new Gson().toJson(Utils.mangmuahang));
-                    compositeDisposable.add(apiBanHang.createOder(str_email,str_sdt,String.valueOf(tongtien),iduser,str_diachi,totalItem,new Gson().toJson(Utils.mangmuahang))
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(
-                                    userModel -> {
-                                        Toast.makeText(getApplicationContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                        Utils.mangmuahang.clear();
-                                        startActivity(intent);
-                                        finish();
-                                    },
-                                    throwable -> {
-                                        Toast.makeText(getApplicationContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                            ));
-                }
+        btnDatHang.setOnClickListener(view -> {
+            String str_diachi = edtdiachi.getText().toString().trim();
+
+            if (TextUtils.isEmpty(str_diachi)) {
+                Toast.makeText(getApplicationContext(), "Vui lòng nhập địa chỉ nhận hàng!", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            String str_email = Utils.user_current.getEmail();
+            String str_sdt = Utils.user_current.getPhone();
+            int iduser = Utils.user_current.getId();
+
+            Log.d("test", new Gson().toJson(Utils.mangmuahang));
+
+            compositeDisposable.add(apiBanHang.createOder(
+                            str_email,
+                            str_sdt,
+                            String.valueOf(tongtien),
+                            iduser,
+                            str_diachi,
+                            totalItem,
+                            new Gson().toJson(Utils.mangmuahang)
+                    )
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            userModel -> {
+                                // ====== ĐẶT HÀNG THÀNH CÔNG ======
+                                Toast.makeText(getApplicationContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+
+                                // XÓA CHỈ SẢN PHẨM ĐƯỢC TICK CHỌN
+                                for (GioHang g : Utils.mangmuahang) {
+                                    for (int i = 0; i < Utils.manggiohang.size(); i++) {
+                                        if (Utils.manggiohang.get(i).getIdsp() == g.getIdsp()) {
+                                            Utils.manggiohang.remove(i);
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                // RESET SẢN PHẨM ĐÃ CHỌN
+                                Utils.mangmuahang.clear();
+
+                                // LƯU GIỎ HÀNG MỚI
+                                Utils.saveGioHang(getApplicationContext());
+
+                                // VỀ TRANG CHỦ
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                finish();
+                            },
+                            throwable -> {
+                                // ======= ĐẶT HÀNG THẤT BẠI =======
+                                Toast.makeText(getApplicationContext(), "Lỗi: " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                                // KHÔNG XOÁ GIỎ HÀNG
+                            }
+                    ));
         });
+
     }
 
 

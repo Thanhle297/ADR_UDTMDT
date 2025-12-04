@@ -56,66 +56,112 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.MyViewHo
         long gia = gioHang.getSoluong() * gioHang.getGiasp();
         holder.item_giohang_giasp2.setText(decimalFormat.format(gia));
 
-        holder.item_giohang_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(@NonNull CompoundButton compoundButton, boolean b) {
-                if (b) {
+        holder.item_giohang_check.setOnCheckedChangeListener(null); // Ngăn set lại listener khi scroll
+
+        holder.item_giohang_check.setChecked(
+                Utils.mangmuahang.contains(gioHang) // Tự đánh dấu nếu đã chọn
+        );
+
+        holder.item_giohang_check.setOnCheckedChangeListener((compoundButton, checked) -> {
+            if (checked) {
+                boolean exists = false;
+                for (GioHang g : Utils.mangmuahang) {
+                    if (g.getIdsp() == gioHang.getIdsp()) {
+                        exists = true;
+                        break;
+                    }
+                }
+                if (!exists) {
                     Utils.mangmuahang.add(gioHang);
-                    EventBus.getDefault().postSticky(new TinhTongEvent());
-                }else{
-                    for(int i = 0; i < Utils.mangmuahang.size(); i++){
-                        if(Utils.mangmuahang.get(i).getIdsp() == gioHang.getIdsp()){
-                            Utils.mangmuahang.remove(i);
-                            EventBus.getDefault().postSticky(new TinhTongEvent());
-                        }
+                }
+            } else {
+                for (int i = 0; i < Utils.mangmuahang.size(); i++) {
+                    if (Utils.mangmuahang.get(i).getIdsp() == gioHang.getIdsp()) {
+                        Utils.mangmuahang.remove(i);
+                        break;
                     }
                 }
             }
+
+            EventBus.getDefault().postSticky(new TinhTongEvent());
         });
+
 
 
         holder.setListener(new ImageClickListener() {
             @Override
             public void onImageClick(View view, int pos, int giatri) {
-                if(giatri == 1 ){
-                    if(gioHangList.get(pos).getSoluong() > 1){
+                if (giatri == 1) {
+                    if (gioHangList.get(pos).getSoluong() > 1) {
+
                         int soluongmoi = gioHangList.get(pos).getSoluong() - 1;
                         gioHangList.get(pos).setSoluong(soluongmoi);
 
-                        holder.item_giohang_soluong.setText(gioHangList.get(pos).getSoluong() +" ");
-                        long gia = gioHangList.get(pos).getSoluong() * gioHangList.get(pos).getGiasp();
+                        // cập nhật trong mangmuahang nếu đang được chọn
+                        if (holder.item_giohang_check.isChecked()) {
+                            for (GioHang g : Utils.mangmuahang) {
+                                if (g.getIdsp() == gioHangList.get(pos).getIdsp()) {
+                                    g.setSoluong(soluongmoi);
+                                    break;
+                                }
+                            }
+                        }
+
+                        holder.item_giohang_soluong.setText(soluongmoi + " ");
+                        long gia = soluongmoi * gioHangList.get(pos).getGiasp();
                         holder.item_giohang_giasp2.setText(decimalFormat.format(gia));
+
                         EventBus.getDefault().postSticky(new TinhTongEvent());
-                    } else if (gioHangList.get(pos).getSoluong() == 1) {
+
+                    } else {
+                        // sản phẩm về 1 thì hỏi để xóa
                         AlertDialog.Builder builder = new AlertDialog.Builder(view.getRootView().getContext());
                         builder.setTitle("Xác nhận xóa sản phẩm");
                         builder.setMessage("Bạn có muốn xóa sản phẩm này?");
-                        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                Utils.manggiohang.remove(pos);
-                                notifyDataSetChanged();
-                                EventBus.getDefault().postSticky(new TinhTongEvent());
+                        builder.setPositiveButton("Có", (dialogInterface, i) -> {
+
+                            // xóa trong giỏ chính
+                            Utils.manggiohang.remove(pos);
+
+                            // xóa trong mangmuahang nếu có
+                            for (int j = 0; j < Utils.mangmuahang.size(); j++) {
+                                if (Utils.mangmuahang.get(j).getIdsp() == gioHang.getIdsp()) {
+                                    Utils.mangmuahang.remove(j);
+                                    break;
+                                }
                             }
+
+                            notifyDataSetChanged();
+                            EventBus.getDefault().postSticky(new TinhTongEvent());
                         });
-                        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        });
+                        builder.setNegativeButton("Hủy", (dialogInterface, i) -> dialogInterface.dismiss());
                         builder.show();
                     }
-                } else if (giatri == 2) {
-                    if (gioHangList.get(pos).getSoluong() < 11){
+
+            } else if (giatri == 2) {
+                    if (gioHangList.get(pos).getSoluong() < 11) {
+
                         int soluongmoi = gioHangList.get(pos).getSoluong() + 1;
                         gioHangList.get(pos).setSoluong(soluongmoi);
+
+                        // cập nhật trong mangmuahang nếu đã chọn
+                        if (holder.item_giohang_check.isChecked()) {
+                            for (GioHang g : Utils.mangmuahang) {
+                                if (g.getIdsp() == gioHangList.get(pos).getIdsp()) {
+                                    g.setSoluong(soluongmoi);
+                                    break;
+                                }
+                            }
+                        }
+
+                        holder.item_giohang_soluong.setText(soluongmoi + " ");
+                        long gia = soluongmoi * gioHangList.get(pos).getGiasp();
+                        holder.item_giohang_giasp2.setText(decimalFormat.format(gia));
                     }
-                    holder.item_giohang_soluong.setText(gioHangList.get(pos).getSoluong() +" ");
-                    long gia = gioHangList.get(pos).getSoluong() * gioHangList.get(pos).getGiasp();
-                    holder.item_giohang_giasp2.setText(decimalFormat.format(gia));
+
                     EventBus.getDefault().postSticky(new TinhTongEvent());
                 }
+
             }
         });
 
